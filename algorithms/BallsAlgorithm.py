@@ -1,23 +1,13 @@
 import numpy as np
 import pandas as pd
 
-def getPairWiseDistance(firstRow, secondRow):
-    nbrOfDisagreement = 0
-    for i, clusterId in enumerate(firstRow):
-        if clusterId != secondRow[i]:
-            nbrOfDisagreement += 1
-    return nbrOfDisagreement/len(firstRow)
-
-
-def sortRowBasedOnSumPWD(matrixPairWiseDist):
-    return np.argsort([sum(PWDForRow) for PWDForRow in matrixPairWiseDist])
-
+from utils import sortRowBasedOnSumPWD, buildMatrixPairWiseDist
 
 class BallsAlgorithm:
     def __init__(self, predictedClusterings):
         self.nbrOfRows = len(predictedClusterings)
         self.bestClustering = -1
-        self.matrixPairWiseDist = self.buildMatrixPairWiseDist(predictedClusterings)
+        self.matrixPairWiseDist = buildMatrixPairWiseDist(self.nbrOfRows, predictedClusterings)
         self.rowIdsSorted = sortRowBasedOnSumPWD(self.matrixPairWiseDist)
 
     def run(self, alpha):
@@ -44,15 +34,6 @@ class BallsAlgorithm:
             clusterId += 1
         self.bestClustering = finalClustering
         return finalClustering
-
-    def buildMatrixPairWiseDist(self, predictedClusterings):
-        matrix = np.zeros((self.nbrOfRows, self.nbrOfRows))
-        for i, firstRow in enumerate(predictedClusterings):
-            for j in range(i+1, self.nbrOfRows):
-                distance = getPairWiseDistance(firstRow, predictedClusterings[j])
-                matrix[i,j] = distance
-                matrix[j,i] = distance
-        return matrix
 
 if __name__ == '__main__':
     # With this example bellow the third column is the one with the less disagreements
