@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 class BestClustering:
 
@@ -29,6 +30,8 @@ class BestClustering:
 
 if __name__ == '__main__':
     # With this example bellow the third column is the one with the less disagreements
-    clusterFound = [[1,1,1],[1,2,2],[2,1,1],[2,2,2],[3,3,3],[3,4,3]]
-    bc = BestClustering(np.array(clusterFound))
+    data = pd.read_csv("../data/testClusters.csv", delimiter=",", header=None)
+    print(data)
+    bc = BestClustering(data.values)
     print(bc.findBestCluster())
+    print(bc.bestClustering)
