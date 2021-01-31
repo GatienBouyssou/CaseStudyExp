@@ -4,7 +4,7 @@ import pandas as pd
 from algorithms.utils import sortRowBasedOnSumPWD, buildMatrixPairWiseDist
 
 class BallsAlgorithm:
-    def __init__(self, predictedClusterings, alpha):
+    def __init__(self, predictedClusterings, alpha=0.4):
         self.nbrOfRows = len(predictedClusterings)
         self.bestClustering = -1
         self.matrixPairWiseDist = buildMatrixPairWiseDist(self.nbrOfRows, predictedClusterings)

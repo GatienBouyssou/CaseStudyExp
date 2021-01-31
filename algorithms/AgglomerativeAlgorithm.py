@@ -36,7 +36,7 @@ class AgglomerativeAlgorithm:
     def updateClusterList(self):
         for i, cluster in enumerate(self.clusterList):
             for j in range(i + 1, len(self.clusterList)):
-                if self.avgDistBtwClusters(cluster, self.clusterList[j]) <= 0.5:
+                if self.avgDistBtwClusters(cluster, self.clusterList[j]) < 0.4:
                     clust1 = self.clusterList.pop(i)
                     clust2 = self.clusterList.pop(j-1)
                     self.clusterList.append(clust1 + clust2)

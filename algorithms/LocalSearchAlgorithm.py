@@ -35,11 +35,16 @@ class AbstractLocalSearch(ABC):
 
 
 class LocalSearch(AbstractLocalSearch):
-    def __init__(self, predictedClusterings, nbrOfClusters=5):
+    def __init__(self, predictedClusterings, initialClustering=[], nbrOfClusters=5):
         self.nbrOfRows = len(predictedClusterings)
         self.matrixPairWiseDist = buildMatrixPairWiseDist(self.nbrOfRows, predictedClusterings)
-        self.clusterList = [int(np.random.rand() * nbrOfClusters) for i in range(self.nbrOfRows)]
-        self.availableClustId = nbrOfClusters
+        if len(initialClustering) != 0:
+            self.availableClustId = max(initialClustering) + 1
+            self.clusterList = initialClustering
+        else:
+            self.clusterList = [int(np.random.rand() * nbrOfClusters) for i in range(self.nbrOfRows)]
+            self.availableClustId = nbrOfClusters
+
         self.bestClustering = -1
 
     def run(self):
