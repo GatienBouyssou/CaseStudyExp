@@ -17,8 +17,8 @@ class BestClustering:
                 secondRow = self.predictedClusterings[j]
                 self.updateDistMatrix(firstRow, secondRow)
         self.ttlNbrOfDisagreements = [sum(self.interClustDist[i,:]) for i in range(self.nbrOfClusterings)]
-        self.bestClustering = np.argmin(self.ttlNbrOfDisagreements)
-        return self.predictedClusterings[:,self.bestClustering]
+        self.bestClustering = self.predictedClusterings[:,np.argmin(self.ttlNbrOfDisagreements)]
+        return self.bestClustering
 
     def updateDistMatrix(self, firstRow, secondRow):
         for i in range(self.nbrOfClusterings):
@@ -34,4 +34,3 @@ if __name__ == '__main__':
     print(data)
     bc = BestClustering(data.values)
     print(bc.findBestCluster())
-    print(bc.bestClustering)

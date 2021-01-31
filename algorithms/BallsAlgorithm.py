@@ -4,13 +4,14 @@ import pandas as pd
 from utils import sortRowBasedOnSumPWD, buildMatrixPairWiseDist
 
 class BallsAlgorithm:
-    def __init__(self, predictedClusterings):
+    def __init__(self, predictedClusterings, alpha):
         self.nbrOfRows = len(predictedClusterings)
         self.bestClustering = -1
         self.matrixPairWiseDist = buildMatrixPairWiseDist(self.nbrOfRows, predictedClusterings)
         self.rowIdsSorted = sortRowBasedOnSumPWD(self.matrixPairWiseDist)
+        self.alpha = alpha
 
-    def run(self, alpha):
+    def run(self):
         copyRowIdsSorted = self.rowIdsSorted.copy()
         finalClustering = np.zeros(self.nbrOfRows, dtype=np.int)
         clusterId = 1
@@ -25,7 +26,7 @@ class BallsAlgorithm:
                     listOfNodeInCluster.append(nodeId)
                     listIndexToRemove.append(i)
                     sumDist += pairWiseDist
-            if sumDist/(len(listOfNodeInCluster)-1) <= alpha:
+            if sumDist/(len(listOfNodeInCluster)-1) <= self.alpha:
                 listOfNodeInCluster.append(potentialCenter)
                 finalClustering.put(listOfNodeInCluster, clusterId)
                 copyRowIdsSorted = np.delete(copyRowIdsSorted, listIndexToRemove)
