@@ -1,4 +1,4 @@
-from utils import buildMatrixPairWiseDist
+from algorithms.utils import buildMatrixPairWiseDist
 import numpy as np
 import pandas as pd
 

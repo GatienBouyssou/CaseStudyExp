@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 
 class BestClustering:
-
     def __init__(self, predictedClusterings):
         self.predictedClusterings = predictedClusterings
         self.nbrOfRows = len(self.predictedClusterings)
@@ -11,7 +10,7 @@ class BestClustering:
         self.ttlNbrOfDisagreements = []
         self.bestClustering = -1
 
-    def findBestCluster(self):
+    def run(self):
         for i, firstRow in enumerate(self.predictedClusterings):
             for j in range(i+1, self.nbrOfRows):
                 secondRow = self.predictedClusterings[j]

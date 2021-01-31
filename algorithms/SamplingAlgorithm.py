@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
-from BallsAlgorithm import BallsAlgorithm
-from LocalSearchAlgorithm import AbstractLocalSearch
-from utils import getPairWiseDistance
+from algorithms.BallsAlgorithm import BallsAlgorithm
+from algorithms.LocalSearchAlgorithm import AbstractLocalSearch
+from algorithms.utils import getPairWiseDistance
 
 class SamplingAlgorithm(AbstractLocalSearch):
     def __init__(self, predictedClusterings, algorithmToRun, batchSize=100, *args):

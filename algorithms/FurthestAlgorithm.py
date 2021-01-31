@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from AgglomerativeAlgorithm import AgglomerativeAlgorithm
+from algorithms.AgglomerativeAlgorithm import AgglomerativeAlgorithm
 
 class FurthestAlgorithm(AgglomerativeAlgorithm):
     def __init__(self, predictedClusterings):
